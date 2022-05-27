@@ -1,0 +1,192 @@
+{
+	"name": "pyastrx",
+	"displayName": "PyASTrX",
+	"description": "Description of pyastrx",
+	"version": "0.1.0",
+	"author": {
+		"name": "Bruno Messias"
+	},
+	"publisher": "Bruno Messias",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/pyastrx/pyastrx-vscode"
+	},
+	"bugs": {
+		"url": "https://github.com/pyastrx/pyastrx-vscode/issues"
+	},
+	"engines": {
+		"vscode": "^1.67.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"*"
+	],
+	"main": "./dist/extension.js",
+	"contributes": {
+		"configuration": {
+			"type": "object",
+			"title": "PyASTrX",
+			"properties": {
+				"pyastrx.command": {
+					"type": "string",
+					"default": "/home/devmessias/anaconda3/envs/astsearch/bin/pyastrx",
+					"markdownDescription": "pyastrx command",
+					"scope": "workspace"
+				},
+				"pyastrx.just-linter": {
+					"type": "boolean",
+					"default": false,
+					"markdownDescription": "Run only rules with use_in_linter:true",
+					"scope": "workspace"
+				},
+				"pyastrx.expand": {
+					"type": "boolean",
+					"default": true,
+					"markdownDescription": "Expand the match results.",
+					"scope": "workspace"
+				}
+			}
+		},
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "pyastrx",
+					"title": "PyASTrX",
+					"icon": "resources/logo4.svg"
+				}
+			]
+		},
+		"viewsWelcome": [
+			{
+				"view": "pyastrx-list",
+				"contents": "Welcome to PyASTrX! \n [learn more](https://google.com/). \n [Reload Matches](command:pyastrx-list.refreshMatches) \n [Run a Custom Xpath](command:pyastrx-list.new-xpath-search) \n [Run YAML Rules](command:pyastrx-list.yamlRules)"
+			}
+		],
+		"views": {
+			"pyastrx": [
+				{
+					"id": "pyastrx-list",
+					"name": "pyastrx matches list "
+				}
+			]
+		},
+		"commands": [
+			{
+				"command": "pyastrx-list.new-xpath-search",
+				"title": "PyASTrX: New XPath Search",
+				"icon": {
+					"dark": "resources/dark/edit.svg",
+					"light": "resources/light/edit.svg"
+				}
+			},
+			{
+				"command": "pyastrx-list.editYAML",
+				"title": "PyASTrX: Edit YAML file",
+				"icon": {
+					"dark": "resources/dark/edit.svg",
+					"light": "resources/light/edit.svg"
+				}
+			},
+			{
+				"command": "pyastrx-list.yamlRules",
+				"title": "PyASTrX: run yaml rules",
+				"icon": {
+					"dark": "resources/light/goByLink.svg",
+					"light": "resources/dark/goByLink.svg"
+				}
+			},
+			{
+				"command": "pyastrx-list.openLink",
+				"title": "PyASTrX: Go to match",
+				"icon": {
+					"light": "resources/light/goByLink.svg",
+					"dark": "resources/dark/goByLink.svg"
+				}
+			},
+			{
+				"command": "pyastrx-list.showMenu",
+				"title": "Show Menu",
+				"icon": {
+					"light": "resources/light/info.svg",
+					"dark": "resources/dark/info.svg"
+				}
+			},
+			{
+				"command": "pyastrx-list.refreshMatches",
+				"title": "PyASTrX: Refresh matches",
+				"icon": {
+					"light": "resources/light/refresh.svg",
+					"dark": "resources/dark/refresh.svg"
+				}
+			}
+		],
+		"menus": {
+			"view/title": [
+				{
+					"command": "pyastrx-list.new-xpath-search",
+					"when": "view == pyastrx-list",
+					"group": "navigation"
+				},
+				{
+					"command": "pyastrx-list.yamlRules",
+					"when": "view == pyastrx-list",
+					"group": "navigation"
+				},
+				{
+					"command": "pyastrx-list.refreshMatches",
+					"when": "view == pyastrx-list",
+					"group": "navigation"
+				}
+			],
+			"view/item/context": [
+				{
+					"command": "pyastrx-list.openLink",
+					"when": "view == pyastrx-list",
+					"group": "inline"
+				}
+			],
+			"commandPalette": [
+				{
+					"command": "pyastrx-list.openLink",
+					"when": "false"
+				}
+			]
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run package",
+		"compile": "webpack --devtool nosources-source-map --config ./build/node-extension.webpack.config.js",
+		"watch": "webpack --watch --devtool nosources-source-map --info-verbosity verbose --config ./build/node-extension.webpack.config.js",
+		"package": "webpack --mode production --config ./build/node-extension.webpack.config.js",
+		"test-compile": "tsc -p ./",
+		"test-watch": "tsc -watch -p ./",
+		"pretest": "npm run test-compile && npm run lint",
+		"lint": "eslint src --ext ts",
+		"test": "node ./out/test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/glob": "^7.1.3",
+		"@types/mocha": "^8.0.0",
+		"@types/node": "^12.11.7",
+		"@types/node-fetch": "^2.5.10",
+		"@types/semver-sort": "0.0.1",
+		"@types/vscode": "^1.52.x",
+		"@typescript-eslint/eslint-plugin": "^4.1.1",
+		"@typescript-eslint/parser": "^4.1.1",
+		"eslint": "^7.9.0",
+		"glob": "^7.1.6",
+		"mocha": "^9.2.0",
+		"ts-loader": "^8.0.3",
+		"typescript": "^4.4.4",
+		"vscode-test": "^1.4.0",
+		"webpack": "^5.72.1",
+		"webpack-cli": "^3.3.12"
+	},
+	"dependencies": {
+		"acorn": "^8.7.1",
+		"node-fetch": ">=2.6.7",
+		"npm": "^8.10.0"
+	}
+}
