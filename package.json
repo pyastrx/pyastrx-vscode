@@ -1,7 +1,7 @@
 {
 	"name": "pyastrx",
 	"displayName": "PyASTrX",
-	"description": "Description of pyastrx",
+	"description": "The PyASTrX philosophy is to provide a simple, easy-to-use, and extensible framework for code quality analysis, refactoring and codebase analysis.",
 	"version": "0.1.0",
 	"author": {
 		"name": "Bruno Messias"
@@ -18,10 +18,14 @@
 		"vscode": "^1.67.0"
 	},
 	"categories": [
-		"Other"
+		"Linters"
 	],
 	"activationEvents": [
-		"*"
+		"onCommand:pyastrx-list.new-xpath-search",
+		"onCommand:pyastrx-list.yamlRules",
+		"onCommand:pyastrx-list.openLink",
+		"onCommand:pyastrx-list.showMenu",
+		"onCommand:pyastrx-list.refreshMatches"
 	],
 	"main": "./dist/extension.js",
 	"contributes": {
@@ -175,10 +179,11 @@
 		"@types/vscode": "^1.52.x",
 		"@typescript-eslint/eslint-plugin": "^4.1.1",
 		"@typescript-eslint/parser": "^4.1.1",
+		"esbuild": "^0.14.41",
 		"eslint": "^7.9.0",
 		"glob": "^7.1.6",
 		"mocha": "^9.2.0",
-		"ts-loader": "^8.0.3",
+		"ts-loader": "^8.4.0",
 		"typescript": "^4.4.4",
 		"vscode-test": "^1.4.0",
 		"webpack": "^5.72.1",

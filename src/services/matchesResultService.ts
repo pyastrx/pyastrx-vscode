@@ -16,7 +16,7 @@ export const getMatches = (): RootNode => {
         return matches;
     }catch(e){
         console.log(e);
-        return {"root":[]};
+        return {"files": {}, "rules": {}};
     }
 
 }

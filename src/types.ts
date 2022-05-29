@@ -28,3 +28,10 @@ export type MatchNode = {
     line: number;
     col: number;
 }
+
+export type RuleInfo = {
+    name: string;
+    description: string;
+    why: string;
+    severity: number;
+}
