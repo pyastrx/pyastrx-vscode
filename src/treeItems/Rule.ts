@@ -10,7 +10,7 @@ export default class Rule extends TreeItem {
     public readonly collapsibleState: TreeItemCollapsibleState,
   ) {
     super(label, collapsibleState);
-    this.tooltip = `${this.label}-${this.severity}`;
+    this.tooltip = this.description;
 		this.description = this.description;
     if (this.severity === 'error') {
       this.iconPath = new ThemeIcon("error");

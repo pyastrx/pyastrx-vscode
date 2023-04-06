@@ -13,9 +13,8 @@ import {
     commands
 } from 'vscode';
 import { configuration } from '../configurations';
-import { getRuleFilesItems, getRulesItems, getFileMatchesItems } from '../services/treeItemsService';
+import { getRuleFilesItems, getRulesItems } from '../services/treeItemsService';
 import Rule from '../treeItems/Rule';
-import File from '../treeItems/File';
 
 
 export class MatchesProvider implements TreeDataProvider<TreeItem>, Disposable {
@@ -39,17 +38,15 @@ export class MatchesProvider implements TreeDataProvider<TreeItem>, Disposable {
     }
 
     getChildren(element?: TreeItem): TreeItem[] {
-        if (element instanceof Rule) {
+        if (element instanceof Rule)
             return getRuleFilesItems(element.nestedFiles);
-        }else if(element instanceof File){
-            return getFileMatchesItems(element.nestedMatches);
-        }
+
         return getRulesItems();
     }
 
     refreshMatches() {
         this._onDidChangeTreeData.fire();
-        commands.executeCommand("pyastrx-list.focus")
+        //commands.executeCommand("pyastrx-list.focus")
     }
 
     openFile(file: string, line: number, column: number) {
@@ -57,7 +54,7 @@ export class MatchesProvider implements TreeDataProvider<TreeItem>, Disposable {
         if (file === undefined)
             return;
 
-        const pos = new Position(line, column);
+        const pos = new Position(line-1, column);
         var openPath = Uri.file(file);
         workspace.openTextDocument(openPath).then(doc =>
         {

@@ -5,9 +5,9 @@ import {MatchNode} from '../types'
 export default class File extends TreeItem {
   constructor(
     public readonly file: string,
+    public readonly tooltip: string,
     public readonly line: number,
     public readonly col : number,
-    public readonly nestedMatches: MatchNode[],
     public readonly collapsibleState: TreeItemCollapsibleState,
 
   ) {
@@ -18,6 +18,7 @@ export default class File extends TreeItem {
     const workspacePath = workspace.workspaceFolders[0].uri.fsPath+'/';
     // remove if exists workspacePath from humanReadableLine
     const humanReadableLine = this.file.replace(workspacePath, '');
-    this.label = `${humanReadableLine}`;
+    this.label = `(${this.line},${this.col}) ${humanReadableLine}`;
+
   }
 }

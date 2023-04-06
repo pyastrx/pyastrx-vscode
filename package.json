@@ -2,7 +2,7 @@
 	"name": "pyastrx",
 	"displayName": "PyASTrX",
 	"description": "The PyASTrX philosophy is to provide a simple, easy-to-use, and extensible framework for code quality analysis, refactoring and codebase analysis.",
-	"version": "0.1.0",
+	"version": "0.1.2",
 	"author": {
 		"name": "Bruno Messias"
 	},
@@ -21,11 +21,8 @@
 		"Linters"
 	],
 	"activationEvents": [
-		"onCommand:pyastrx-list.new-xpath-search",
-		"onCommand:pyastrx-list.yamlRules",
-		"onCommand:pyastrx-list.openLink",
-		"onCommand:pyastrx-list.showMenu",
-		"onCommand:pyastrx-list.refreshMatches"
+		 "workspaceContains:pyastrx.yaml"
+
 	],
 	"main": "./dist/extension.js",
 	"contributes": {
@@ -50,7 +47,11 @@
 					"default": true,
 					"markdownDescription": "Expand the match results.",
 					"scope": "workspace"
-				}
+				},
+				 "pyastrx.enableCodeLens": {
+                    "type": "boolean",
+                    "default": true
+                }
 			}
 		},
 		"viewsContainers": {
@@ -65,7 +66,7 @@
 		"viewsWelcome": [
 			{
 				"view": "pyastrx-list",
-				"contents": "Welcome to PyASTrX! \n [learn more](https://google.com/). \n [Reload Matches](command:pyastrx-list.refreshMatches) \n [Run a Custom Xpath](command:pyastrx-list.new-xpath-search) \n [Run YAML Rules](command:pyastrx-list.yamlRules)"
+				"contents": "Welcome to PyASTrX! \n [Create pyastrx.yaml](command:pyastrx-list.initDefaultConf) \n [Learn more](https://pyastrx.readthedocs.io/en/latest/). \n [Examples](https://pyastrx.readthedocs.io/en/latest/examples.html) \n [How to Use](https://pyastrx.readthedocs.io/en/latest/cli.html)"
 			}
 		],
 		"views": {
@@ -78,27 +79,11 @@
 		},
 		"commands": [
 			{
-				"command": "pyastrx-list.new-xpath-search",
-				"title": "PyASTrX: New XPath Search",
-				"icon": {
-					"dark": "resources/dark/edit.svg",
-					"light": "resources/light/edit.svg"
-				}
-			},
-			{
-				"command": "pyastrx-list.editYAML",
-				"title": "PyASTrX: Edit YAML file",
-				"icon": {
-					"dark": "resources/dark/edit.svg",
-					"light": "resources/light/edit.svg"
-				}
-			},
-			{
 				"command": "pyastrx-list.yamlRules",
-				"title": "PyASTrX: run yaml rules",
+				"title": "PyASTrX: refresh YAML rules",
 				"icon": {
-					"dark": "resources/light/goByLink.svg",
-					"light": "resources/dark/goByLink.svg"
+					"light": "resources/light/refresh.svg",
+					"dark": "resources/dark/refresh.svg"
 				}
 			},
 			{
@@ -117,29 +102,21 @@
 					"dark": "resources/dark/info.svg"
 				}
 			},
-			{
-				"command": "pyastrx-list.refreshMatches",
-				"title": "PyASTrX: Refresh matches",
-				"icon": {
-					"light": "resources/light/refresh.svg",
-					"dark": "resources/dark/refresh.svg"
-				}
-			}
+			 {
+                "title": "Enable CodeLens",
+                "command": "pyastrx.enableCodeLens",
+                "category": "PyASTrX"
+            },
+            {
+                "title": "Disable Codelens",
+                "command": "pyastrx.disableCodeLens",
+                "category": "PyASTrX"
+            }
 		],
 		"menus": {
 			"view/title": [
 				{
-					"command": "pyastrx-list.new-xpath-search",
-					"when": "view == pyastrx-list",
-					"group": "navigation"
-				},
-				{
 					"command": "pyastrx-list.yamlRules",
-					"when": "view == pyastrx-list",
-					"group": "navigation"
-				},
-				{
-					"command": "pyastrx-list.refreshMatches",
 					"when": "view == pyastrx-list",
 					"group": "navigation"
 				}
